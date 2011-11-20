@@ -1,0 +1,1 @@
+<a class="btn <?php echo $class ?>" href="<?php echo $view['router']->generate($route, $route_param) ?>"><?php echo $name ?></a>

@@ -1,0 +1,28 @@
+parameters:
+    ruian.twitterbootstrap.topbar.service.class: Ruian\TwitterBootstrapBundle\Services\TopBarService
+    ruian.twitterbootstrap.topbar.helper.class: Ruian\TwitterBootstrapBundle\Helper\TopBarHelper
+    ruian.twitterbootstrap.breadcrumb.helper.class: Ruian\TwitterBootstrapBundle\Helper\BreadcrumbHelper
+    ruian.twitterbootstrap.alert.helper.class: Ruian\TwitterBootstrapBundle\Helper\AlertHelper
+
+services:
+    ruian.twitterbootstrap.topbar:
+        class: %ruian.twitterbootstrap.topbar.service.class%
+        arguments: [@service_container]
+    
+    ruian.twitterbootstrap.topbar.helper:
+        class: %ruian.twitterbootstrap.topbar.helper.class%
+        arguments: [@service_container]
+        tags:
+            - { name: templating.helper, alias: ruian.twitterbootstrap.topbar }
+    
+    ruian.twitterbootstrap.breadcrumb.helper:
+        class: %ruian.twitterbootstrap.breadcrumb.helper.class%
+        arguments: [@service_container]
+        tags:
+            - { name: templating.helper, alias: ruian.twitterbootstrap.breadcrumb }
+    
+    ruian.twitterbootstrap.alert.helper:
+        class: %ruian.twitterbootstrap.alert.helper.class%
+        arguments: [@service_container]
+        tags:
+            - { name: templating.helper, alias: ruian.twitterbootstrap.alert }

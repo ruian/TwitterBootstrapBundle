@@ -1,0 +1,31 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/bin/npm', 'install', 'lessc' ]
+info using npm@1.0.10
+info using node@v0.5.0-pre
+verbose config file /Users/juliengalenski/.npmrc
+verbose config file /usr/etc/npmrc
+verbose into /Users/juliengalenski/Documents/Entreprise/Perso/jgalenski3/src/Ruian/TwitterBootstrapBundle/Resources/public/css/lib [ 'lessc' ]
+verbose cache add [ 'lessc', null ]
+info addNamed [ 'lessc', '' ]
+verbose addNamed [ null, '' ]
+verbose GET lessc
+verbose raw, before any munging lessc
+verbose url resolving [ 'http://registry.npmjs.org/', './lessc' ]
+verbose url resolved http://registry.npmjs.org/lessc
+verbose url parsed { protocol: 'http:',
+verbose url parsed   slashes: true,
+verbose url parsed   host: 'registry.npmjs.org',
+verbose url parsed   hostname: 'registry.npmjs.org',
+verbose url parsed   href: 'http://registry.npmjs.org/lessc',
+verbose url parsed   pathname: '/lessc' }
+ERR! Error: ETIMEDOUT, Operation timed out
+ERR!     at Socket._onConnect (net.js:602:18)
+ERR!     at IOWatcher.onWritable [as callback] (net.js:186:12)
+ERR! Report this *entire* log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Darwin 10.8.0
+ERR! command "node" "/bin/npm" "install" "lessc"
+verbose exit [ 60, true ]

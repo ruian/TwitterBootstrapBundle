@@ -1,0 +1,15 @@
+RuianTwitterBootstrapBundle_test_alert_basic:
+    pattern:  /test/bootstraptwitter/alert/basic
+    defaults: { _controller: RuianTwitterBootstrapBundle:Test:alertBasic }
+
+RuianTwitterBootstrapBundle_test_alert_block:
+    pattern:  /test/bootstraptwitter/alert/block
+    defaults: { _controller: RuianTwitterBootstrapBundle:Test:alertBlock }
+
+RuianTwitterBootstrapBundle_test_breadcrumb:
+    pattern:  /test/bootstraptwitter/breadcrumb
+    defaults: { _controller: RuianTwitterBootstrapBundle:Test:breadcrumb }
+
+RuianTwitterBootstrapBundle_test_top_bar:
+    pattern:  /test/bootstraptwitter/topbar
+    defaults: { _controller: RuianTwitterBootstrapBundle:Test:topBar }
