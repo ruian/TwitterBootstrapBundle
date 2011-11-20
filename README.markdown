@@ -1,1 +1,1 @@
-[Read the Documentation](https://github.com/ruian/TwitterBootstrapBundle/blob/test/Resources/doc/index.md)
+[Read the Documentation](https://github.com/ruian/TwitterBootstrapBundle/blob/master/Resources/doc/index.md)
