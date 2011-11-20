@@ -26,5 +26,8 @@ class TopBarServiceTest extends \PHPUnit_Framework_TestCase
         $topbar_generate = TopBarService::generateTopBar($topbar_array);
         
         $this->assertTrue(($topbar_generate instanceof TopBar));
+        $this->assertTrue(($topbar_generate->getTitle() === 'default bar'));
+        $this->assertTrue(($topbar_generate->getRoute() === 'RuianTwitterBootstrapBundle_test_alert_basic'));
+        $this->assertTrue((count($topbar_generate->getNav()->getChildren()) === 1));
     }
 }
