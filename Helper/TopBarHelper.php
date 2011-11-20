@@ -32,12 +32,12 @@ class TopBarHelper extends Helper
      */
     protected $request;
 
-    function __construct($container)
+    public function __construct($templating, $engine, $request, $topbarService)
     {
-        $this->templating = $container->get('templating');
-        $this->engine = $container->getParameter('ruian.twitterbootstrap.engine');
-        $this->topbarService = $container->get('ruian.twitterbootstrap.topbar');
-        $this->request = $container->get('request');
+        $this->templating = $templating;
+        $this->engine = $engine;
+        $this->request = $request;
+        $this->topbarService = $topbarService;
     }
 
     /**

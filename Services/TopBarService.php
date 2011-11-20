@@ -16,9 +16,9 @@ class TopBarService
      */
     protected $topbars;
 
-    public function __construct($container)
+    public function __construct($topbars)
     {
-        $this->topbars = $container->getParameter('ruian.twitterbootstrap.topbars');
+        $this->topbars = $topbars;
     }
 
     /**

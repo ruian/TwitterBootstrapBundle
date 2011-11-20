@@ -31,11 +31,11 @@ class BreadcrumbHelper extends Helper
     /**
      * 
      */
-    public function __construct($container)
+    public function __construct($templating, $engine, $request)
     {
-        $this->templating = $container->get('templating');
-        $this->engine = $container->getParameter('ruian.twitterbootstrap.engine');
-        $this->request = $container->get('request');
+        $this->templating = $templating;
+        $this->engine = $engine;
+        $this->request = $request;
     }
 
     /**

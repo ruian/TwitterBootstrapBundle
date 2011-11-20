@@ -7,22 +7,24 @@ parameters:
 services:
     ruian.twitterbootstrap.topbar:
         class: %ruian.twitterbootstrap.topbar.service.class%
-        arguments: [@service_container]
+        arguments: [%ruian.twitterbootstrap.topbars%]
     
     ruian.twitterbootstrap.topbar.helper:
         class: %ruian.twitterbootstrap.topbar.helper.class%
-        arguments: [@service_container]
+        arguments: [@templating, %ruian.twitterbootstrap.engine%, @request, @ruian.twitterbootstrap.topbar]
+        scope: request
         tags:
             - { name: templating.helper, alias: ruian.twitterbootstrap.topbar }
     
     ruian.twitterbootstrap.breadcrumb.helper:
         class: %ruian.twitterbootstrap.breadcrumb.helper.class%
-        arguments: [@service_container]
+        arguments: [@templating, %ruian.twitterbootstrap.engine%, @request]
+        scope: request
         tags:
             - { name: templating.helper, alias: ruian.twitterbootstrap.breadcrumb }
     
     ruian.twitterbootstrap.alert.helper:
         class: %ruian.twitterbootstrap.alert.helper.class%
-        arguments: [@service_container]
+        arguments: [@templating, %ruian.twitterbootstrap.engine%]
         tags:
             - { name: templating.helper, alias: ruian.twitterbootstrap.alert }

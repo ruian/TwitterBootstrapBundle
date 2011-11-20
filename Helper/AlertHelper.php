@@ -23,10 +23,10 @@ class AlertHelper extends Helper
     /**
      * 
      */
-    public function __construct($container)
+    public function __construct($templating, $engine)
     {
-        $this->templating = $container->get('templating');
-        $this->engine = $container->getParameter('ruian.twitterbootstrap.engine');
+        $this->templating = $templating;
+        $this->engine = $engine;
     }
 
     /**

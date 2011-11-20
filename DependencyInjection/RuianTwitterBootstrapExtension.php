@@ -25,7 +25,7 @@ class RuianTwitterBootstrapExtension extends Extension
         if (isset($config['engine'])) {
             $container->setParameter('ruian.twitterbootstrap.engine', $config['engine']);
         } else {
-            $container->setParameter('ruian.twitterbootstrap.engine', $configuration['engine']);
+            $container->setParameter('ruian.twitterbootstrap.engine', 'php');
         }
         
         if (isset($config['topbars'])) {
