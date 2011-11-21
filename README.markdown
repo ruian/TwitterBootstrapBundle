@@ -232,12 +232,12 @@ Do not forget to add assets at your layout.
 
 <a name="todo"></a>
 ## TODO
-Add Twig templates
-Add a better Form support
-Add support Tabs and Pills
-Add Secondary navigation in topbar
-Add Form in topbar
-Add popover support
-Add Tooltips support
+Add Twig templates<br/>
+Add a better Form support<br/>
+Add support Tabs and Pills<br/>
+Add Secondary navigation in topbar<br/>
+Add Form in topbar<br/>
+Add popover support<br/>
+Add Tooltips support<br/>
 
-Add Travis ?
+Add Travis ?<br/>
