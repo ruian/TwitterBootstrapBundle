@@ -7,6 +7,7 @@ TwitterBootstrapBundle
 * [Breadcrumb](#breadcrumb)
 * [Top bar](#topbar)
 * [Assets](#assets)
+* [Todo](#todo)
 
 <a name="installation"></a>
 
@@ -228,3 +229,15 @@ Do not forget to add assets at your layout.
 @RuianTwitterBootstrapBundle/Resources/public/js/bootstrap-tabs.js
 @RuianTwitterBootstrapBundle/Resources/public/js/bootstrap-twipsy.js
 ```
+
+<a name="todo"></a>
+## TODO
+Add Twig templates
+Add a better Form support
+Add support Tabs and Pills
+Add Secondary navigation in topbar
+Add Form in topbar
+Add popover support
+Add Tooltips support
+
+Add Travis ?
