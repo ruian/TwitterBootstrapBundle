@@ -22,7 +22,7 @@ install`:
 
 ```
 [RuianTwitterBootstrapBundle]
-    git=git://github.com/ruian/RuianTwitterBootstrapBundle.git
+    git=git://github.com/ruian/TwitterBootstrapBundle.git
     target=bundles/Ruian/TwitterBootstrapBundle
 ```
 
