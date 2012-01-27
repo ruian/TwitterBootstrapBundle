@@ -29,6 +29,7 @@ TwitterBootstrapBundle
 ##Add autoloading
 
 ```
+#app/autoload.php
 $loader->registerNamespaces(array(
     #...
     'Ruian' => __DIR__.'/../vendor/bundles',
@@ -44,6 +45,7 @@ require  __DIR__.'/../vendor/lessphp/lessc.inc.php';
 ##Register this bundle
 
 ```
+#app/AppKernel.php
 $bundles = array(
     #...
     new Ruian\TwitterBootstrapBundle\RuianTwitterBootstrapBundle(),
@@ -92,4 +94,89 @@ Remplace VERSION by the supported version you want, v1 or v2
 
 ```
 {% form_theme form_view 'RuianTwitterBootstrapBundle:Form:bootstrap_VERSION.html.twig' %}
+```
+
+
+##Example
+```
+#Ruian/DemoBundle/Resources/view/new.html.twig
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New article</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/ruiantwitterbootstrap/css/bootstrapv2.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/ruiantwitterbootstrap/css/bootstrapv2-responsive.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="offset2 span8">
+                
+                {% include 'RuianTwitterBootstrapBundle:Alert:bootstrap_v2.html.twig' %}
+
+                {% form_theme form_view 'RuianTwitterBootstrapBundle:Form:bootstrap_v2.html.twig' %}
+                <form novalidate class="form-horizontal well" method="post" action="{{ path('JgalenskiDemoBundle_new') }}">
+                    {{ form_widget(form_view) }}
+                    <div class="well">
+                        <input type="submit" value="Save" class="btn" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ asset('bundles/jgalenskidemo/js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/ruiantwitterbootstrap/js/bootstrapv2.js') }}"></script>
+</body>
+</html>
+```
+
+```
+#Ruian/DemoBundle/Controller/ArticleController.php
+/**
+ * Controller used for Article
+ *
+ * @author jgalenski
+ */
+class ArticleController extends Controller
+{
+    # some code ...
+    
+    public function newAction()
+    {
+        $entity = new Article();
+        $form = $this->createForm(new ArticleType(), $entity);
+        
+        $request = $this->get('request');
+        if ('POST' === $request->getMethod()) {
+            $form->bindRequest($request);
+            if (true === $form->isValid()) {
+                $em = $this->get('doctrine.orm.default_entity_manager');
+                $em->persist($entity);
+                $em->flush();
+
+                $this->setFlashSuccess('Congratulation, your article has been saved.');
+                return $this->redirect($this->generateUrl('JgalenskiDemoBundle_new'));
+            } else {
+                $this->setFlashError('Warning, your article can\'t be saved due to some errors.');
+            }
+        }
+
+        return $this->render('JgalenskiDemoBundle:Article:new.html.twig', array(
+            'form_view' => $form->createView(),
+        ));
+    }
+
+    protected function setFlashSuccess($message)
+    {
+        $this->get('session')->setFlash('alert-success', $message);
+    }
+
+    protected function setFlashError($message)
+    {
+        $this->get('session')->setFlash('alert-error', $message);
+    }
+
+    # some code ...
+}
+
 ```
