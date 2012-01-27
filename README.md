@@ -9,6 +9,7 @@ TwitterBootstrapBundle
 [RuianTwitterBootstrapBundle]
     git=git://github.com/ruian/TwitterBootstrapBundle.git
     version=origin/master
+    target=/bundles/Ruian/TwitterBootstrapBundle
 
 [TwitterBootstrap1]
     git=git://github.com/twitter/bootstrap.git
