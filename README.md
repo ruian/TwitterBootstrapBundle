@@ -8,7 +8,7 @@ TwitterBootstrapBundle
 ```
 [RuianTwitterBootstrapBundle]
     git=git://github.com/ruian/TwitterBootstrapBundle.git
-    version=v2
+    version=origin/master
 
 [TwitterBootstrap1]
     git=git://github.com/twitter/bootstrap.git
