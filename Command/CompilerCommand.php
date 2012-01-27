@@ -51,14 +51,22 @@ class CompilerCommand extends ContainerAwareCommand
 
     protected function writeCss($version, $output)
     {
-        $in = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/lib/bootstrap.less';
-        $out = __DIR__ . '/../Resources/public/css/bootstrap' . $version . '.css';
-        lessc::ccompile($in, $out);
-        $output->writeln('<comment>Writing bootstrap'.$version.'.css from bootstrap.less</comment>');
-        $output->writeln('<comment>You can add bundles/ruiantwitterbootstrap/css/bootstrap'.$version.'.css to your layout</comment>');
+        if ('v1' === $version) {
+            $in = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/lib/bootstrap.less';
+            $out = __DIR__ . '/../Resources/public/css/bootstrap' . $version . '.css';
+            lessc::ccompile($in, $out);
+            $output->writeln('<comment>Writing bootstrap'.$version.'.css from bootstrap.less</comment>');
+            $output->writeln('<comment>You can add bundles/ruiantwitterbootstrap/css/bootstrap'.$version.'.css to your layout</comment>');
+        }
 
         if ('v2' === $version) {
-            $in = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/lib/responsive.less';
+            $in = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/less/bootstrap.less';
+            $out = __DIR__ . '/../Resources/public/css/bootstrap' . $version . '.css';
+            lessc::ccompile($in, $out);
+            $output->writeln('<comment>Writing bootstrap'.$version.'.css from bootstrap.less</comment>');
+            $output->writeln('<comment>You can add bundles/ruiantwitterbootstrap/css/bootstrap'.$version.'.css to your layout</comment>');
+
+            $in = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/less/responsive.less';
             $out = __DIR__ . '/../Resources/public/css/bootstrap' . $version . '-responsive.css';
             lessc::ccompile($in, $out);
             $output->writeln('<comment>Writing bootstrap'.$version.'-responsive.css from responsive.less</comment>');
