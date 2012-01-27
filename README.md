@@ -140,7 +140,7 @@ Remplace VERSION by the supported version you want, v1 or v2
 class ArticleController extends Controller
 {
     # some code ...
-    
+
     public function newAction()
     {
         $entity = new Article();
@@ -155,13 +155,13 @@ class ArticleController extends Controller
                 $em->flush();
 
                 $this->setFlashSuccess('Congratulation, your article has been saved.');
-                return $this->redirect($this->generateUrl('JgalenskiDemoBundle_new'));
+                return $this->redirect($this->generateUrl('RuianDemoBundle_new'));
             } else {
                 $this->setFlashError('Warning, your article can\'t be saved due to some errors.');
             }
         }
 
-        return $this->render('JgalenskiDemoBundle:Article:new.html.twig', array(
+        return $this->render('RuianDemoBundle:Article:new.html.twig', array(
             'form_view' => $form->createView(),
         ));
     }
