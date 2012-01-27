@@ -124,7 +124,7 @@ Remplace VERSION by the supported version you want, v1 or v2
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{{ asset('bundles/jgalenskidemo/js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/ruiandemo/js/jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/ruiantwitterbootstrap/js/bootstrapv2.js') }}"></script>
 </body>
 </html>
