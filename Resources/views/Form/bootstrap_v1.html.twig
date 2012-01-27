@@ -5,8 +5,8 @@
         <div class="input">
             {{ form_widget(form) }}
         </div>
-        {{ form_errors(form)}}
     </div>
+    {{ form_errors(form)}}
 {% endspaceless %}
 {% endblock field_row %}
 
@@ -14,13 +14,23 @@
 {% spaceless %}
     {% if errors|length > 0 %}
     
-        {% for error in errors %}
-        <div class="alert-message error" data-alert="data-alert">
-            <a class="close" href="#">×</a>
-            {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
-      </div>
-        {% endfor %}
+    {% for error in errors %}
+    <div class="alert-message error input" data-alert="data-alert">
+        <a class="close" href="#">×</a>
+        {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
+    </div>
+    {% endfor %}
     
     {% endif %}
 {% endspaceless %}
 {% endblock field_errors %}
+
+{% block generic_label %}
+{% set attr = attr|merge({'class': ''}) %}
+{% spaceless %}
+    {% if required %}
+        {% set attr = attr|merge({'class': 'required'}) %}
+    {% endif %}
+    <label{% for attrname,attrvalue in attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+{% endspaceless %}
+{% endblock %}

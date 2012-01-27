@@ -1,0 +1,30 @@
+{% if app.session.hasFlash('alert-success') %}
+{% set message = app.session.getFlash('alert-success') %}
+{% set type = 'success' %}
+{% endif %}
+
+{% if app.session.hasFlash('alert-error') %}
+{% set message = app.session.getFlash('alert-error') %}
+{% set type = 'error' %}
+{% endif %}
+
+{% if app.session.hasFlash('alert-warning') %}
+{% set message = app.session.getFlash('alert-warning') %}
+{% set type = 'warning' %}
+{% endif %}
+
+{% if app.session.hasFlash('alert-info') %}
+{% set message = app.session.getFlash('alert-info') %}
+{% set type = 'info' %}
+{% endif %}
+
+{% if type is defined %}
+{# --> Start bootstrap_alert block #}
+{% block bootstrap_alert %}
+<div class="alert-message block-message {{ type }}" data-alert="alert">
+    <a class="close" href="#">×</a>
+    {{ message }}
+</div>
+{% endblock bootstrap_alert %}
+{# <-- End bootstrap_alert block #}
+{% endif %}
