@@ -115,7 +115,7 @@ Remplace VERSION by the supported version you want, v1 or v2
                 {% include 'RuianTwitterBootstrapBundle:Alert:bootstrap_v2.html.twig' %}
 
                 {% form_theme form_view 'RuianTwitterBootstrapBundle:Form:bootstrap_v2.html.twig' %}
-                <form novalidate class="form-horizontal well" method="post" action="{{ path('JgalenskiDemoBundle_new') }}">
+                <form novalidate class="form-horizontal well" method="post" action="{{ path('RuianDemoBundle_new') }}">
                     {{ form_widget(form_view) }}
                     <div class="well">
                         <input type="submit" value="Save" class="btn" />
