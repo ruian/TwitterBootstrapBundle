@@ -1,0 +1,26 @@
+{% block field_row %}
+{% spaceless %}
+    <div class="control-group {% if errors|length > 0 %}error{% elseif value %}success{% endif %}">
+        {{ form_label(form, label|default(null)) }}
+        <div class="controls">
+            {{ form_widget(form) }}
+        </div>
+        {{ form_errors(form)}}
+    </div>
+{% endspaceless %}
+{% endblock field_row %}
+
+{% block field_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+    
+        {% for error in errors %}
+        <div class="alert alert-error">
+          <a class="close" data-dismiss="alert">×</a>
+          {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}
+        </div>
+        {% endfor %}
+    
+    {% endif %}
+{% endspaceless %}
+{% endblock field_errors %}
