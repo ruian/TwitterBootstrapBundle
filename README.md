@@ -29,7 +29,7 @@ TwitterBootstrapBundle
 
 ##Add autoloading
 
-```
+```php
 #app/autoload.php
 $loader->registerNamespaces(array(
     #...
@@ -45,7 +45,7 @@ require  __DIR__.'/../vendor/lessphp/lessc.inc.php';
 
 ##Register this bundle
 
-```
+```php
 #app/AppKernel.php
 $bundles = array(
     #...
@@ -55,7 +55,7 @@ $bundles = array(
 
 ##Update and install all the deps
 
-```
+```shell
 ./bin/vendors update
 or
 ./bin/vendors install --reinstall
@@ -66,7 +66,7 @@ or
 ##Init and compile twitter-bootstrap from source
 Remplace VERSION by the supported version you want, v1 or v2
 
-```
+```shell
 php5 app/console twitter-bootstrap:clear
 php5 app/console twitter-bootstrap:compile VERSION
 php5 app/console assets:install web/
@@ -75,7 +75,7 @@ php5 app/console assets:install web/
 ##Add your bootstrap to your layout
 Remplace VERSION by the supported version you want, v1 or v2
 
-```
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,7 +99,8 @@ Remplace VERSION by the supported version you want, v1 or v2
 
 
 ##Example
-```
+
+```html
 #Ruian/DemoBundle/Resources/view/new.html.twig
 <!DOCTYPE html>
 <html>
@@ -131,7 +132,7 @@ Remplace VERSION by the supported version you want, v1 or v2
 </html>
 ```
 
-```
+```php
 #Ruian/DemoBundle/Controller/ArticleController.php
 /**
  * Controller used for Article
