@@ -133,6 +133,7 @@ Remplace VERSION by the supported version you want, v1 or v2
 ```
 
 ```php
+<?php
 #Ruian/DemoBundle/Controller/ArticleController.php
 /**
  * Controller used for Article
