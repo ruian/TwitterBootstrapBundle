@@ -35,7 +35,7 @@ class ClearCommand extends ContainerAwareCommand
         $finder = new Finder();
         $finder->files()->in(__DIR__ . '/../Resources/public/')->name('/(js$)|(css$)/');
 
-        foreach ($finder as $file) {
+        foreach ($finder->files() as $file) {
             unlink($file->getRealPath());
             $output->writeln('<comment>Delete '. $file->getFilename() .'</comment>');
         }

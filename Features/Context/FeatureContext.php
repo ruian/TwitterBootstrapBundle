@@ -28,20 +28,8 @@ use Ruian\TwitterBootstrapBundle\Command\ClearCommand;
  */
 class FeatureContext extends BehatContext //MinkContext if you want to test web
 {
-//
-// Place your definition and hook methods here:
-//
-//    /**
-//     * @Given /^I have done something with "([^"]*)"$/
-//     */
-//    public function iHaveDoneSomethingWith($argument)
-//    {
-//        $container = $this->getContainer();
-//        $container->get('some_service')->doSomethingWith($argument);
-//    }
-//
-    private $application;
-    private $tester;
+    protected $application;
+    protected $tester;
     protected $cmd_line;
 
     public function __construct($kernel)
@@ -138,13 +126,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      */
     public function iShouldSee(PyStringNode $string)
     {
-        $assert = false;
-        if (1 === strcmp($string->getRaw(), $this->tester->getDisplay()) 
-        || -1 === strcmp($string->getRaw(), $this->tester->getDisplay())) {
-            $assert = true;
-        }
-
-        assertTrue($assert);
+        assertTrue(preg_replace('/(\n)/', '', $string->getRaw()) === preg_replace('/(\n)/', '',$this->tester->getDisplay()));
     }
 
     /**
@@ -154,7 +136,7 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     {
         $assert = false;
         $finder = new Finder();
-        $finder->files()->in(__DIR__ . '/../../Resources/public/');
+        $finder->files()->in(__DIR__ . '/../../Resources/public/')->name('/(css$)|(js$)/');
 
         foreach ($finder->files() as $file) {
             if ($filename === $file->getFilename()) {
@@ -171,8 +153,14 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     public function iShouldGetNoFile()
     {
         $finder = new Finder();
-        $finder->files()->in(__DIR__ . '/../../Resources/public/');
+        $finder->files()->in(__DIR__ . '/../../Resources/public/')->name('/(css$)|(js$)/');
 
-        assertTrue(0 < count($finder->files()));
+        $assert = true;
+        foreach ($finder->files() as $key => $value) {
+            $assert = false;
+            break;
+        }
+        
+        assertTrue($assert);
     }
 }
