@@ -31,6 +31,7 @@ TwitterBootstrapBundle
 
 ```php
 #app/autoload.php
+ <?php
 $loader->registerNamespaces(array(
     #...
     'Ruian' => __DIR__.'/../vendor/bundles',
@@ -47,6 +48,7 @@ require  __DIR__.'/../vendor/lessphp/lessc.inc.php';
 
 ```php
 #app/AppKernel.php
+ <?php
 $bundles = array(
     #...
     new Ruian\TwitterBootstrapBundle\RuianTwitterBootstrapBundle(),
@@ -133,8 +135,8 @@ Remplace VERSION by the supported version you want, v1 or v2
 ```
 
 ```php
-<?php
 #Ruian/DemoBundle/Controller/ArticleController.php
+ <?php
 /**
  * Controller used for Article
  *
