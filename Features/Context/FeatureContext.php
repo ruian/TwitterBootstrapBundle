@@ -14,8 +14,10 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Console\Input\StringInput;
 use Ruian\TwitterBootstrapBundle\Command\CompilerCommand;
 use Ruian\TwitterBootstrapBundle\Command\ClearCommand;
+use Symfony\Component\Console\Output\StreamOutput;
 //
 // Require 3rd-party libraries here:
 //
@@ -29,8 +31,7 @@ use Ruian\TwitterBootstrapBundle\Command\ClearCommand;
 class FeatureContext extends BehatContext //MinkContext if you want to test web
 {
     protected $application;
-    protected $tester;
-    protected $cmd_line;
+    protected $output;
 
     public function __construct($kernel)
     {
@@ -45,80 +46,11 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      */
     public function iRunCommand($cmd_line)
     {
-        $this->cmd_line = $cmd_line;
-        $name = $this->getCommandName();
-        $command = $this->application->find($name);
-
-        $arguments = $this->getCommandArguments($command);
-        $options = $this->getCommandOptions();
-        
-        $this->tester = new CommandTester($command);
-        $this->tester->execute(array_merge(array('command' => $name), $arguments, $options));
-    }
-
-    protected function getCommandName()
-    {
-        $position = strlen($this->cmd_line);
-        if (strpos($this->cmd_line, ' ')) {
-            $position = strpos($this->cmd_line, ' ');
-        }
-
-        $rest = substr($this->cmd_line, 0, $position);
-        if (false !== $rest) {
-            $this->cmd_line = substr($this->cmd_line, $position + 1);
-            return $rest;
-        }
-
-        return $this->cmd_line;
-    }
-
-    protected function getCommandArguments($command)
-    {
-        $space = false;
-        $position_end = strlen($this->cmd_line);
-        $length = strlen($this->cmd_line);
-        for ($i = 0;$i < $length; $i++) {
-            if ($this->cmd_line[$i] === ' ') {
-                $space = true;
-            } elseif ($space === true && $this->cmd_line[$i] === '-') {
-                $position_end = $i - 1;
-                break;
-            } else {
-                $space = false;
-            }
-        }
-        
-        $cmd_args_has_string = substr($this->cmd_line, 0, $position_end);
-        $this->cmd_line = substr($this->cmd_line, $position_end + 1);
-        
-        $cmd_args_has_array = explode(' ', $cmd_args_has_string);
-        $cmd_def_args = $command->getDefinition()->getArguments();
-        
-        $cmd_args = array();
-        $i = 0;
-        foreach ($cmd_def_args as $key => $argument) {
-            $cmd_args[$argument->getName()] = $cmd_args_has_array[$i];
-            $i++;
-        }
-
-        return $cmd_args;
-    }
-
-    protected function getCommandOptions()
-    {
-        if (false === $this->cmd_line) {
-            return array();
-        }
-
-        $cmd_options_has_array = explode(' ', $this->cmd_line);
-
-        $cmd_options = array();
-        foreach ($cmd_options_has_array as $option) {
-            $option_has_array = explode('=', $option);
-            $cmd_options[$option_has_array[0]] = array_key_exists(1, $option_has_array) ? $option_has_array[1] : null;
-        }
-
-        return $cmd_options;
+        $input = new StringInput($cmd_line);
+        $command = $this->application->find($input->getFirstArgument('command'));
+        $input = new StringInput($cmd_line, $command->getDefinition());
+        $this->output = new StreamOutput(fopen('php://memory', 'w', false));
+        $command->run($input, $this->output);
     }
 
     /**
@@ -126,7 +58,9 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
      */
     public function iShouldSee(PyStringNode $string)
     {
-        assertTrue(preg_replace('/(\n)/', '', $string->getRaw()) === preg_replace('/(\n)/', '',$this->tester->getDisplay()));
+        rewind($this->output->getStream());
+        $display = stream_get_contents($this->output->getStream());
+        assertSame($string->getRaw(), $display);
     }
 
     /**
