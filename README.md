@@ -1,6 +1,9 @@
 TwitterBootstrapBundle
 ======================
 
+#WARNING
+If you use a symfony 2.0.x version please use the correct branch of this bundle (2.0.x in that case)
+
 #How to install ?
 
 ##Add theses lines into your deps
