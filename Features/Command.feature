@@ -56,6 +56,29 @@ Feature: CompilerCommand
         And I should get a file "bootstrapv1.css"
         And I should get a file "bootstrapv1.js"
 
+    Scenario: Compile twitter bootstrap
+        When I run "twitter-bootstrap:compile" command
+        Then I should see
+        """
+        Writing bootstrapv1.css from bootstrap.less
+        You can add bundles/ruiantwitterbootstrap/css/bootstrapv1.css to your layout
+        Success, bootstrapv1.css has been write in /Ruian/TwitterBootstrapBundle/Resources/public/css/bootstrapv1.css
+        Adding bootstrap-alerts.js
+        Adding bootstrap-buttons.js
+        Adding bootstrap-dropdown.js
+        Adding bootstrap-modal.js
+        Adding bootstrap-popover.js
+        Adding bootstrap-scrollspy.js
+        Adding bootstrap-tabs.js
+        Adding bootstrap-twipsy.js
+        Writing bootstrapv1.js
+        You can add bundles/ruiantwitterbootstrap/js/bootstrapv1.js to your layout
+        Success, bootstrapv1.js has been write in  /Ruian/TwitterBootstrapBundle/Resources/public/js/bootstrapv1.js
+
+        """
+        And I should get a file "bootstrapv1.css"
+        And I should get a file "bootstrapv1.js"
+
     Scenario: Clear resources
         When I run "twitter-bootstrap:clear" command
         Then I should see
