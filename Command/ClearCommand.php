@@ -33,7 +33,7 @@ class ClearCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $finder = new Finder();
-        $finder->files()->in(__DIR__ . '/../Resources/public/')->name('/(js$)|(css$)/');
+        $finder->files()->in(__DIR__ . '/../Resources/public/')->name('/(js$)|(css$)/')->sortByName();
 
         foreach ($finder->files() as $file) {
             unlink($file->getRealPath());

@@ -14,7 +14,6 @@ class CompilerCommand extends ContainerAwareCommand
 {
     protected $versions;
 
-
     public function __construct()
     {
         parent::__construct($name = null);
@@ -81,7 +80,7 @@ class CompilerCommand extends ContainerAwareCommand
         // Compiler tout les fichier js/*.js Ruian\TwitterBootstrap\Resources\public\js\bootstrap'version'.js
         $finder = new Finder();
         $finder->depth('== 0');
-        $finder->files()->in(__DIR__ . '/../../../../twitter/bootstrap/'.$version.'/js/')->name('*.js');
+        $finder->files()->in(__DIR__ . '/../../../../twitter/bootstrap/'.$version.'/js/')->name('*.js')->sortByName();
 
         $bootstrapjs = null;
         foreach ($finder as $file) {
