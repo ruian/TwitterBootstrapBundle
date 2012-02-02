@@ -17,12 +17,12 @@ If you use a symfony 2.0.x version please use the correct branch of this bundle 
 [TwitterBootstrap1]
     git=git://github.com/twitter/bootstrap.git
     target=/twitter/bootstrap/v1/
-    version=origin/master
+    version=v1.4.0
 
 [TwitterBootstrap2]
     git=git://github.com/twitter/bootstrap.git
     target=/twitter/bootstrap/v2/
-    version=origin/2.0-wip
+    version=v2.0.0
 
 [lessphp]
     git=git://github.com/leafo/lessphp.git

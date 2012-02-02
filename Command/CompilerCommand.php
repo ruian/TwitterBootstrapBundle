@@ -51,7 +51,7 @@ class CompilerCommand extends ContainerAwareCommand
     protected function writeCss($version, $output)
     {
         if ('v1' === $version) {
-            $in = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/less/bootstrap.less';
+            $in = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/lib/bootstrap.less';
             $out = __DIR__ . '/../Resources/public/css/bootstrap' . $version . '.css';
             lessc::ccompile($in, $out);
             $output->writeln('<comment>Writing bootstrap'.$version.'.css from bootstrap.less</comment>');
