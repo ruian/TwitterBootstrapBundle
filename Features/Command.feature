@@ -100,3 +100,4 @@ Feature: CompilerCommand
         
         """
         Then I should get no file
+        
