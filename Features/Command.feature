@@ -40,18 +40,14 @@ Feature: CompilerCommand
         Writing bootstrapv1.css from bootstrap.less
         You can add bundles/ruiantwitterbootstrap/css/bootstrapv1.css to your layout
         Success, bootstrapv1.css has been write in /Ruian/TwitterBootstrapBundle/Resources/public/css/bootstrapv1.css
-        Adding bootstrap-alert.js
-        Adding bootstrap-button.js
-        Adding bootstrap-carousel.js
-        Adding bootstrap-collapse.js
+        Adding bootstrap-alerts.js
+        Adding bootstrap-buttons.js
         Adding bootstrap-dropdown.js
         Adding bootstrap-modal.js
         Adding bootstrap-popover.js
         Adding bootstrap-scrollspy.js
-        Adding bootstrap-tab.js
-        Adding bootstrap-tooltip.js
-        Adding bootstrap-transition.js
-        Adding bootstrap-typeahead.js
+        Adding bootstrap-tabs.js
+        Adding bootstrap-twipsy.js
         Writing bootstrapv1.js
         You can add bundles/ruiantwitterbootstrap/js/bootstrapv1.js to your layout
         Success, bootstrapv1.js has been write in  /Ruian/TwitterBootstrapBundle/Resources/public/js/bootstrapv1.js
@@ -67,18 +63,14 @@ Feature: CompilerCommand
         Writing bootstrapv1.css from bootstrap.less
         You can add bundles/ruiantwitterbootstrap/css/bootstrapv1.css to your layout
         Success, bootstrapv1.css has been write in /Ruian/TwitterBootstrapBundle/Resources/public/css/bootstrapv1.css
-        Adding bootstrap-alert.js
-        Adding bootstrap-button.js
-        Adding bootstrap-carousel.js
-        Adding bootstrap-collapse.js
+        Adding bootstrap-alerts.js
+        Adding bootstrap-buttons.js
         Adding bootstrap-dropdown.js
         Adding bootstrap-modal.js
         Adding bootstrap-popover.js
         Adding bootstrap-scrollspy.js
-        Adding bootstrap-tab.js
-        Adding bootstrap-tooltip.js
-        Adding bootstrap-transition.js
-        Adding bootstrap-typeahead.js
+        Adding bootstrap-tabs.js
+        Adding bootstrap-twipsy.js
         Writing bootstrapv1.js
         You can add bundles/ruiantwitterbootstrap/js/bootstrapv1.js to your layout
         Success, bootstrapv1.js has been write in  /Ruian/TwitterBootstrapBundle/Resources/public/js/bootstrapv1.js
@@ -100,4 +92,3 @@ Feature: CompilerCommand
         
         """
         Then I should get no file
-        
