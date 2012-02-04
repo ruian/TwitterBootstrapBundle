@@ -69,7 +69,7 @@ or
 #How to use it ?
 
 ##Init and compile twitter-bootstrap from source
-Remplace VERSION by the supported version you want, v1 or v2
+Replace VERSION by the supported version you want, v1 or v2
 
 ```shell
 php5 app/console twitter-bootstrap:clear
@@ -78,7 +78,7 @@ php5 app/console assets:install web/
 ```
 
 ##Add your bootstrap to your layout
-Remplace VERSION by the supported version you want, v1 or v2
+Replace VERSION by the supported version you want, v1 or v2
 
 ```html
 <!DOCTYPE html>
@@ -96,7 +96,7 @@ Remplace VERSION by the supported version you want, v1 or v2
 ```
 
 ##Use bootstrap form style
-Remplace VERSION by the supported version you want, v1 or v2
+Replace VERSION by the supported version you want, v1 or v2
 
 ```
 {% form_theme form_view 'RuianTwitterBootstrapBundle:Form:bootstrap_VERSION.html.twig' %}
