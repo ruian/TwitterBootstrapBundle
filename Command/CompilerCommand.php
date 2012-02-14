@@ -40,11 +40,11 @@ class CompilerCommand extends ContainerAwareCommand
         }
 
         if (true === $this->writeCss($version, $output)) {
-            $output->writeln('<info>Success, bootstrap'.$version.'.css has been write in /Ruian/TwitterBootstrapBundle/Resources/public/css/bootstrap'.$version.'.css</info>');
+            $output->writeln('<info>Success, bootstrap'.$version.'.css has been written in /Ruian/TwitterBootstrapBundle/Resources/public/css/bootstrap'.$version.'.css</info>');
         }
 
         if (true === $this->writeJs($version, $output)) {
-            $output->writeln('<info>Success, bootstrap'.$version.'.js has been write in  /Ruian/TwitterBootstrapBundle/Resources/public/js/bootstrap'.$version.'.js</info>');
+            $output->writeln('<info>Success, bootstrap'.$version.'.js has been written in /Ruian/TwitterBootstrapBundle/Resources/public/js/bootstrap'.$version.'.js</info>');
         }
     }
 
@@ -77,15 +77,38 @@ class CompilerCommand extends ContainerAwareCommand
 
     protected function writeJs($version, $output)
     {
-        // Compiler tout les fichier js/*.js Ruian\TwitterBootstrap\Resources\public\js\bootstrap'version'.js
+        $jsDir = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/js/';
+        //here we use finder only to add some new files if bootstrap adds them
+        //default bootstrap files, order is important
+        $files = array('bootstrap-transition.js',
+          'bootstrap-alert.js',
+          'bootstrap-button.js',
+          'bootstrap-carousel.js',
+          'bootstrap-collapse.js',
+          'bootstrap-dropdown.js',
+          'bootstrap-modal.js',
+          'bootstrap-tooltip.js',
+          'bootstrap-popover.js',
+          'bootstrap-scrollspy.js',
+          'bootstrap-tab.js',
+          'bootstrap-typeahead.js');
+
         $finder = new Finder();
         $finder->depth('== 0');
-        $finder->files()->in(__DIR__ . '/../../../../twitter/bootstrap/'.$version.'/js/')->name('*.js')->sortByName();
+        $finder->files()->in($jsDir)->name('*.js');
+
+        foreach ($finder as $file) {
+          $baseFile = basename($file);
+          if (!in_array($baseFile, $files)) {
+            $output->writeln(sprintf('<comment>Found NEW file "%s", bootstrap has new javascripts?</comment>', $baseFile));
+            $files[] = $baseFile;
+          }
+        }
 
         $bootstrapjs = null;
-        foreach ($finder as $file) {
-            $bootstrapjs .= file_get_contents($file->getRealPath());
-            $output->writeln('<comment>Adding '.$file->getFilename().'</comment>');
+        foreach ($files as $file) {
+            $bootstrapjs .= file_get_contents(realpath($jsDir . $file));
+            $output->writeln('<comment>Adding '.$file.'</comment>');
         }
         file_put_contents(__DIR__ . '/../Resources/public/js/bootstrap'.$version.'.js', $bootstrapjs);
         $output->writeln('<comment>Writing bootstrap'.$version.'.js</comment>');
