@@ -14,9 +14,9 @@ class CompilerCommand extends ContainerAwareCommand
 {
     protected $versions;
 
-    public function __construct()
+    public function __construct($name = null)
     {
-        parent::__construct($name = null);
+        parent::__construct($name);
         $this->versions = array(
             'v1',
             'v2'
@@ -35,6 +35,7 @@ class CompilerCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $version = $input->getArgument('version');
+        
         if (false === in_array($version, $this->versions)) {
             throw new TwitterBootstrapVersionException("Version you have selected is not supported, or inexistant. Please choose one of these versions " . implode(' or ', $this->versions));
         }
@@ -71,7 +72,7 @@ class CompilerCommand extends ContainerAwareCommand
             $output->writeln('<comment>Writing bootstrap'.$version.'-responsive.css from responsive.less</comment>');
             $output->writeln('<comment>You can add bundles/ruiantwitterbootstrap/css/bootstrap'.$version.'-responsive.css to your layout</comment>');
         }
-        
+
         return true;
     }
 
@@ -106,13 +107,17 @@ class CompilerCommand extends ContainerAwareCommand
         }
 
         $bootstrapjs = null;
+
         foreach ($files as $file) {
             $bootstrapjs .= file_get_contents(realpath($jsDir . $file));
             $output->writeln('<comment>Adding '.$file.'</comment>');
         }
+
         file_put_contents(__DIR__ . '/../Resources/public/js/bootstrap'.$version.'.js', $bootstrapjs);
+
         $output->writeln('<comment>Writing bootstrap'.$version.'.js</comment>');
         $output->writeln('<comment>You can add bundles/ruiantwitterbootstrap/js/bootstrap'.$version.'.js to your layout</comment>');
+
         return true;
     }
 }
