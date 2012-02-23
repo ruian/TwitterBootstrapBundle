@@ -14,9 +14,9 @@ class CompilerCommand extends ContainerAwareCommand
 {
     protected $versions;
 
-    public function __construct()
+    public function __construct($name = null)
     {
-        parent::__construct($name = null);
+        parent::__construct($name);
         $this->versions = array(
             'v1',
             'v2'
@@ -35,6 +35,7 @@ class CompilerCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $version = $input->getArgument('version');
+
         if (false === in_array($version, $this->versions)) {
             throw new TwitterBootstrapVersionException("Version you have selected is not supported, or inexistant. Please choose one of these versions " . implode(' or ', $this->versions));
         }
@@ -46,6 +47,10 @@ class CompilerCommand extends ContainerAwareCommand
         if (true === $this->writeJs($version, $output)) {
             $output->writeln('<info>Success, bootstrap'.$version.'.js has been written in /Ruian/TwitterBootstrapBundle/Resources/public/js/bootstrap'.$version.'.js</info>');
         }
+
+        if (true === $this->copyImages($version, $output)) {
+            $output->writeln('<info>Success, bootstrap'.$version.' images have been copied to /Ruian/TwitterBootstrapBundle/Resources/public/img</info>');
+        }
     }
 
     protected function writeCss($version, $output)
@@ -53,7 +58,9 @@ class CompilerCommand extends ContainerAwareCommand
         if ('v1' === $version) {
             $in = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/lib/bootstrap.less';
             $out = __DIR__ . '/../Resources/public/css/bootstrap' . $version . '.css';
+
             lessc::ccompile($in, $out);
+
             $output->writeln('<comment>Writing bootstrap'.$version.'.css from bootstrap.less</comment>');
             $output->writeln('<comment>You can add bundles/ruiantwitterbootstrap/css/bootstrap'.$version.'.css to your layout</comment>');
         }
@@ -61,17 +68,33 @@ class CompilerCommand extends ContainerAwareCommand
         if ('v2' === $version) {
             $in = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/less/bootstrap.less';
             $out = __DIR__ . '/../Resources/public/css/bootstrap' . $version . '.css';
+
             lessc::ccompile($in, $out);
+
             $output->writeln('<comment>Writing bootstrap'.$version.'.css from bootstrap.less</comment>');
             $output->writeln('<comment>You can add bundles/ruiantwitterbootstrap/css/bootstrap'.$version.'.css to your layout</comment>');
 
             $in = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/less/responsive.less';
             $out = __DIR__ . '/../Resources/public/css/bootstrap' . $version . '-responsive.css';
+
             lessc::ccompile($in, $out);
+
             $output->writeln('<comment>Writing bootstrap'.$version.'-responsive.css from responsive.less</comment>');
             $output->writeln('<comment>You can add bundles/ruiantwitterbootstrap/css/bootstrap'.$version.'-responsive.css to your layout</comment>');
         }
-        
+
+        return true;
+    }
+
+    protected function copyImages($version, $output) {
+        //no images to copy for 1.x bootstrap
+
+        if ('v2' === $version) {
+            foreach (glob(__DIR__ . '/../../../../twitter/bootstrap/'.$version.'/img/*') as $image) {
+                copy($image, __DIR__ . '/../Resources/public/img/' . basename($image));
+            }
+        }
+
         return true;
     }
 
@@ -106,13 +129,17 @@ class CompilerCommand extends ContainerAwareCommand
         }
 
         $bootstrapjs = null;
+
         foreach ($files as $file) {
             $bootstrapjs .= file_get_contents(realpath($jsDir . $file));
             $output->writeln('<comment>Adding '.$file.'</comment>');
         }
+
         file_put_contents(__DIR__ . '/../Resources/public/js/bootstrap'.$version.'.js', $bootstrapjs);
+
         $output->writeln('<comment>Writing bootstrap'.$version.'.js</comment>');
         $output->writeln('<comment>You can add bundles/ruiantwitterbootstrap/js/bootstrap'.$version.'.js to your layout</comment>');
+
         return true;
     }
 }
