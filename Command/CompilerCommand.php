@@ -55,6 +55,10 @@ class CompilerCommand extends ContainerAwareCommand
 
     protected function writeCss($version, $output)
     {
+        if (!is_dir(__DIR__ . '/../Resources/public/css/')) {
+            mkdir(__DIR__ . '/../Resources/public/css/', 0777, true);
+        }
+
         if ('v1' === $version) {
             $in = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/lib/bootstrap.less';
             $out = __DIR__ . '/../Resources/public/css/bootstrap' . $version . '.css';
@@ -90,6 +94,10 @@ class CompilerCommand extends ContainerAwareCommand
         //no images to copy for 1.x bootstrap
 
         if ('v2' === $version) {
+            if (!is_dir(__DIR__ . '/../Resources/public/img/')) {
+                mkdir(__DIR__ . '/../Resources/public/img/', 0777, true);
+            }
+
             foreach (glob(__DIR__ . '/../../../../twitter/bootstrap/'.$version.'/img/*') as $image) {
                 copy($image, __DIR__ . '/../Resources/public/img/' . basename($image));
             }
@@ -101,6 +109,11 @@ class CompilerCommand extends ContainerAwareCommand
     protected function writeJs($version, $output)
     {
         $jsDir = __DIR__ . '/../../../../twitter/bootstrap/'.$version.'/js/';
+
+        if (!is_dir(__DIR__ . '/../Resources/public/js/')) {
+            mkdir(__DIR__ . '/../Resources/public/js/', 0777, true);
+        }
+
         //here we use finder only to add some new files if bootstrap adds them
         //default bootstrap files, order is important
         $files = array('bootstrap-transition.js',
